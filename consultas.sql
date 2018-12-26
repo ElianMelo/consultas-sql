@@ -32,10 +32,11 @@ DESCRIBE pessoas;
 
 -- Insere valores na tabela pessoas -- 
 INSERT INTO pessoas
-(nome, nascimento, sexo, peso, altura, nacionalidade)
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
 VALUES
-('Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil'),
-('Maria', '1999-12-30', 'F', '55.2', '1.65', 'Portugal');
+-- ('Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil'),
+-- ('Maria', '1999-12-30', 'F', '55.2', '1.65', 'Portugal'),
+(DEFAULT, 'Creuza', '1920-12-30', 'F', '50.2', '1.65', DEFAULT);
 
 -- Exibe todos os campos e registros da tabela pessoas -- 
 SELECT * FROM pessoas; 
