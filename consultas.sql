@@ -95,3 +95,29 @@ ADD PRIMARY KEY(idcurso);
 
 -- Exibe todos os campos e registros da tabela cursos -- 
 SELECT * FROM cursos;
+
+-- Cria uma tabela teste --
+CREATE TABLE IF NOT EXISTS teste(
+	id int,
+    nome varchar(10),
+	idade int
+);
+
+-- Insere valores na tabela teste --
+INSERT INTO teste VALUES
+('1', 'Pedro', '22'),
+('2', 'Maria', '12'),
+('3', 'Maricota', '77');
+
+-- Exibe todos os campos e registros da tabela teste -- 
+SELECT * FROM teste;
+
+-- Apaga um campo da tabela teste
+ALTER TABLE teste
+DROP id;
+
+-- Apaga a tabela alunos se ela existir
+DROP TABLE IF EXISTS alunos;
+
+-- Apaga a tabela teste se ela existir
+DROP TABLE IF EXISTS teste;
