@@ -27,7 +27,7 @@ CREATE TABLE pessoas(
     PRIMARY KEY(id)
 )DEFAULT CHARSET = utf8;
 
--- Exibe as informações da tabela pessoas --
+-- Exibe as informações da tabela pessoas/gafanhotos --
 DESCRIBE pessoas;
 DESC pessoas;
 DESC gafanhotos;
@@ -81,3 +81,17 @@ CREATE TABLE IF NOT EXISTS cursos(
     totaulas int UNSIGNED,
     ano year DEFAULT '2016'
 )DEFAULT CHARSET = utf8;
+
+-- Exibe as informações da tabela cursos --
+DESC cursos;
+
+-- Adiciona a coluna idcurso na primeira posição --
+ALTER TABLE cursos
+ADD COLUMN idcurso int FIRST;
+
+-- Define a coluna idcurso como a chave primária --
+ALTER TABLE cursos
+ADD PRIMARY KEY(idcurso);
+
+-- Exibe todos os campos e registros da tabela cursos -- 
+SELECT * FROM cursos;
