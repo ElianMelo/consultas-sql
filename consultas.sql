@@ -183,3 +183,13 @@ LIMIT 2;
 
 -- Deleta todos os registros da tabela cursos --
 TRUNCATE /* TABLE */ cursos;
+
+-- Informações do Banco de Dados --
+SELECT * FROM cursos;
+SELECT * FROM gafanhotos;
+DESCRIBE gafanhotos;
+DESC cursos;
+SHOW TABLES;
+
+-- Apaga o Banco de Dados cadastro --
+DROP DATABASE cadastro;
