@@ -27,10 +27,9 @@ CREATE TABLE pessoas(
     PRIMARY KEY(id)
 )DEFAULT CHARSET = utf8;
 
--- Exibe as informações da tabela pessoas/gafanhotos --
+-- Exibe as informações da tabela pessoas --
 DESCRIBE pessoas;
 DESC pessoas;
-DESC gafanhotos;
 
 -- Insere valores na tabela pessoas -- 
 INSERT INTO pessoas VALUES
@@ -73,6 +72,10 @@ CHANGE COLUMN profissao prof varchar(20);
 ALTER TABLE pessoas
 RENAME TO gafanhotos;
 
+-- Altera a tabela gafanhotos removendo a coluna codigo --
+ALTER TABLE gafanhotos
+DROP codigo;
+
 -- Cria a tabela cursos --
 CREATE TABLE IF NOT EXISTS cursos(
 	nome varchar(30) NOT NULL UNIQUE,
@@ -112,12 +115,71 @@ INSERT INTO teste VALUES
 -- Exibe todos os campos e registros da tabela teste -- 
 SELECT * FROM teste;
 
--- Apaga um campo da tabela teste
+-- Apaga o campo id da tabela teste --
 ALTER TABLE teste
 DROP id;
 
--- Apaga a tabela alunos se ela existir
+-- Apaga a tabela alunos se ela existir --
 DROP TABLE IF EXISTS alunos;
 
--- Apaga a tabela teste se ela existir
+-- Apaga a tabela teste se ela existir --
 DROP TABLE IF EXISTS teste;
+
+-- Exibe todos os campos e registros da tabela gafanhotos -- 
+SELECT * FROM gafanhotos;
+
+-- Insere diversos valores na tabela cursos --
+INSERT INTO cursos VALUES
+	('1','HTML4','Curso de HTML5', '40','37','2014'),
+	('2','Algoritmos','Lógica de Programação','20','15','2014'),
+	('3','Photoshop','Dicas de Photoshop CC','10','8','2014'),
+	('4','PGP','Curso de PHP para iniciantes','40','20','2010'),
+	('5','Jarva','Introdução à Linguagem Java','10','29','2000'),
+	('6','MySQL','Banco de Dados MySQL','30','15','2016'),
+	('7','Word','Curso completo de Word','40','30','2016'),
+	('8','Sapateado','Danças Rítmicas','40','30','2018'),
+	('9','Cozinha Árabe','Aprenda a fazer Kibe','40','30','2018'),
+	('10','Youtuber','Gerar polêmica e ganhar inscritos','5','2','2018');
+
+-- Exibe todos os campos e registros da tabela cursos -- 
+SELECT * FROM cursos;
+
+-- Atualiza o nome do registro para HTML5 na tabela cursos onde o idcurso é 1 --
+UPDATE cursos
+SET nome = 'HTML5' 
+WHERE idcurso = '1';
+
+-- Atualiza o nome e o ano do registro para PHP e 2015 na tabela cursos onde o idcurso é 4 --
+UPDATE cursos
+SET nome = 'PHP', ano = '2015'
+WHERE idcurso = '4';
+
+-- Atualiza o nome, a carga e o ano do registro para Java, 40 e 2015 na tabela cursos onde o idcurso é 5, limitando a 1 linha --
+UPDATE cursos
+SET nome = 'Java', carga = '40', ano = '2015'
+WHERE idcurso = '5'
+LIMIT 1;
+
+-- Altera a carga e o ano de cursos inválidos --
+UPDATE cursos
+SET ano = '2050', carga = '800'
+WHERE ano = '2018'
+LIMIT 2;
+
+-- Desativa o SAFE UPDATES --
+SET SQL_SAFE_UPDATES = 0;
+
+-- Ativa o SAFE UPDATES --
+SET SQL_SAFE_UPDATES = 1;
+
+-- Deleta da tabela cursos o registro que tiver idcurso igual a 8 --
+DELETE FROM cursos
+WHERE idcurso = '8';
+
+-- Deleta da tabela cursos dois registros que estiverem no ano de 2050 --
+DELETE FROM cursos
+WHERE ano = '2050'
+LIMIT 2;
+
+-- Deleta todos os registros da tabela cursos --
+TRUNCATE /* TABLE */ cursos;
