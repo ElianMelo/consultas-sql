@@ -4,21 +4,21 @@ Data de criação do arquivo: 26/12/2018
 Objetivo sucinto do arquivo: Demonstrar operações na linguagem SQL
 Referência: https://www.youtube.com/playlist?list=PLHz_AreHm4dkBs-795Dsgvau_ekxg8g1r
 */
--- Usa o banco de dados cadastro -- 
+-- Usa o banco de dados cadastro --
 USE cadastro;
 
 -- Deleta o banco de dados cadastro --
-DROP DATABASE cadastro; 
+DROP DATABASE cadastro;
 
 -- Cria o banco de dados cadastro --
-CREATE DATABASE cadastro 
+CREATE DATABASE cadastro
 DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci; 
+DEFAULT COLLATE utf8_general_ci;
 
 -- Cria a tabela pessoas --
 CREATE TABLE pessoas(
 	id int NOT NULL AUTO_INCREMENT,
-	nome varchar(30) NOT NULL, 
+	nome varchar(30) NOT NULL,
     nascimento date,
     sexo enum('M', 'F'),
     peso decimal(5, 2),
@@ -31,7 +31,7 @@ CREATE TABLE pessoas(
 DESCRIBE pessoas;
 DESC pessoas;
 
--- Insere valores na tabela pessoas -- 
+-- Insere valores na tabela pessoas --
 INSERT INTO pessoas VALUES
 (DEFAULT, 'Godofredo', '1984-01-02', 'M', '78.5', '1.83', 'Brasil'),
 (DEFAULT, 'Maria', '1999-12-30', 'F', '55.2', '1.65', 'Portugal'),
@@ -41,12 +41,12 @@ INSERT INTO pessoas VALUES
 (DEFAULT, 'Pedro', '1999-12-03', 'M', '87', '2', DEFAULT),
 (DEFAULT, 'Janaína', '1987-11-12', 'F', '75.4', '1.66', 'EUA');
 
--- Exibe todos os campos e registros da tabela pessoas -- 
+-- Exibe todos os campos e registros da tabela pessoas --
 SELECT * FROM pessoas;
 
--- Altera a tabela pessoas adicionando a coluna profissao -- 
+-- Altera a tabela pessoas adicionando a coluna profissao --
 ALTER TABLE pessoas
-ADD COLUMN profissao varchar(10); 
+ADD COLUMN profissao varchar(10);
 
 -- Altera a tabela pessoas removendo a coluna profissao --
 ALTER TABLE pessoas
@@ -62,7 +62,7 @@ ADD /* COLUMN */ codigo int FIRST;
 
 -- Altera a tabela pessoas modificando a coluna profissao --
 ALTER TABLE pessoas
-MODIFY COLUMN profissao varchar(20) NOT NULL DEFAULT ''; 
+MODIFY COLUMN profissao varchar(20) NOT NULL DEFAULT '';
 
 -- Altera a tabela pessoas modificando o nome da coluna profissao --
 ALTER TABLE pessoas
@@ -96,7 +96,7 @@ ADD COLUMN idcurso int FIRST;
 ALTER TABLE cursos
 ADD PRIMARY KEY(idcurso);
 
--- Exibe todos os campos e registros da tabela cursos -- 
+-- Exibe todos os campos e registros da tabela cursos --
 SELECT * FROM cursos;
 
 -- Cria uma tabela teste --
@@ -112,7 +112,7 @@ INSERT INTO teste VALUES
 ('2', 'Maria', '12'),
 ('3', 'Maricota', '77');
 
--- Exibe todos os campos e registros da tabela teste -- 
+-- Exibe todos os campos e registros da tabela teste --
 SELECT * FROM teste;
 
 -- Apaga o campo id da tabela teste --
@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS alunos;
 -- Apaga a tabela teste se ela existir --
 DROP TABLE IF EXISTS teste;
 
--- Exibe todos os campos e registros da tabela gafanhotos -- 
+-- Exibe todos os campos e registros da tabela gafanhotos --
 SELECT * FROM gafanhotos;
 
 -- Insere diversos valores na tabela cursos --
@@ -141,20 +141,20 @@ INSERT INTO cursos VALUES
 	('9','Cozinha Árabe','Aprenda a fazer Kibe','40','30','2018'),
 	('10','Youtuber','Gerar polêmica e ganhar inscritos','5','2','2018');
 
--- Exibe todos os campos e registros da tabela cursos -- 
+-- Exibe todos os campos e registros da tabela cursos --
 SELECT * FROM cursos;
 
--- Atualiza o nome do registro para HTML5 na tabela cursos onde o idcurso é 1 --
+-- Atualiza o nome do registro para HTML5 na tabela cursos em que o idcurso é 1 --
 UPDATE cursos
-SET nome = 'HTML5' 
+SET nome = 'HTML5'
 WHERE idcurso = '1';
 
--- Atualiza o nome e o ano do registro para PHP e 2015 na tabela cursos onde o idcurso é 4 --
+-- Atualiza o nome e o ano do registro para PHP e 2015 na tabela cursos em que o idcurso é 4 --
 UPDATE cursos
 SET nome = 'PHP', ano = '2015'
 WHERE idcurso = '4';
 
--- Atualiza o nome, a carga e o ano do registro para Java, 40 e 2015 na tabela cursos onde o idcurso é 5, limitando a 1 linha --
+-- Atualiza o nome, a carga e o ano do registro para Java, 40 e 2015 na tabela cursos em que o idcurso é 5, limitando a 1 linha --
 UPDATE cursos
 SET nome = 'Java', carga = '40', ano = '2015'
 WHERE idcurso = '5'
@@ -193,3 +193,78 @@ SHOW TABLES;
 
 -- Apaga o Banco de Dados cadastro --
 DROP DATABASE cadastro;
+
+-- Exibe todos os campos e registros da tabela gafanhotos --
+SELECT * FROM gafanhotos;
+
+-- Exibe todos os campos e registros da tabela cursos --
+SELECT * FROM cursos;
+
+-- Exibe todos os campos e registros da tabela cursos ordenados pelo nome de forma crescente --
+SELECT * FROM cursos
+ORDER BY nome /* ASC */;
+
+-- Exibe todos os campos e registros da tabela cursos ordenados pelo nome de forma decrescente --
+SELECT * FROM cursos
+ORDER BY nome DESC;
+
+-- Exibe os campos nome, carga e ano da tabela cursos ordenados pelo nome --
+SELECT nome, carga, ano FROM cursos
+ORDER BY nome;
+
+-- Exibe os campos ano, nome e carga da tabela cursos ordenados pelo nome --
+SELECT ano, nome, carga FROM cursos
+ORDER BY nome;
+
+-- Exibe os campos ano, nome e carga da tabela cursos ordenados pelo ano --
+SELECT ano, nome, carga FROM cursos
+ORDER BY ano;
+
+-- Exibe os campos ano, nome e carga da tabela cursos ordenados pelo ano e depois por nome --
+SELECT ano, nome, carga FROM cursos
+ORDER BY ano, nome;
+
+-- Exibe todos os campos da tabela cursos em que o ano é 2016 ordenados pelo nome --
+SELECT * FROM cursos
+WHERE ano = '2016'
+ORDER BY nome;
+
+-- Exibe os campos nome e carga da tabela cursos em que o ano é 2016 ordenados pelo nome --
+SELECT nome, carga FROM cursos
+WHERE ano = '2016'
+ORDER BY nome;
+
+-- Exibe os campos nome, descrição e ano da tabela cursos em que o ano é menor ou igual a 2015 ordenados pelo ano e depois pelo nome --
+SELECT nome, descricao, ano FROM cursos
+WHERE ano <= /* = != <> < > >= */ 2015
+ORDER BY ano, nome;
+
+-- Exibe todos os campos da tabela cursos em que o total de aulas está entre 20 e 30 ordenados pelo nome --
+SELECT * FROM cursos
+WHERE totaulas BETWEEN '20' AND '30'
+ORDER BY nome;
+
+-- Exibe os campos nome e ano da tabela cursos em que o ano está entre 2014 e 2016, ordenando o ano de forma decrescente e depois o nome de forma ascendente --
+SELECT nome, ano FROM cursos
+WHERE ano BETWEEN 2014 AND 2016
+ORDER BY ano DESC, nome ASC;
+
+-- Exibe os campos idcurso e nome da tabela cursos em que o ano pode ser 2014, 2016 ou 2018 ordenados pelo nome --
+SELECT idcurso, nome FROM cursos
+WHERE ano IN ('2014', '2016', '2018')
+ORDER BY nome;
+
+-- Exibe os campos nome, descricao e ano da tabela cursos em que o ano pode ser 2014, 2016 ou 2020 ordenados pelo ano --
+SELECT nome, descricao, ano FROM cursos
+WHERE ano IN (2014, 2016, 2020)
+ORDER BY ano;
+
+-- Exibe os campos nome, carga e total de aulas da tabela cursos em que a carga é maior que 35 e o total de aulas menor que 30 --
+SELECT nome, carga, totaulas FROM cursos
+WHERE carga > 35 AND totaulas < 30
+ORDER BY nome;
+
+-- Exibe os campos nome, carga e total de aulas da tabela cursos em que a carga é maior que 35 ou o total de aulas menor que 30 --
+SELECT nome, carga, totaulas FROM cursos
+WHERE carga > 35 OR totaulas < 30
+ORDER BY nome;
