@@ -268,3 +268,73 @@ ORDER BY nome;
 SELECT nome, carga, totaulas FROM cursos
 WHERE carga > 35 OR totaulas < 30
 ORDER BY nome;
+
+-- Exibe todos os campos da tabela cursos em que o nome começa com P --
+SELECT * FROM cursos
+WHERE nome LIKE 'P%'; 
+
+-- Exibe todos os campos da tabela cursos em que o nome termina com A --
+SELECT * FROM cursos
+WHERE nome LIKE '%A';
+
+-- Exibe todos os campos da tabela cursos em que o nome tenha a letra A --
+SELECT * FROM cursos
+WHERE nome LIKE '%A%';
+
+-- Exibe todos os campos da tabela cursos em que o nome não tenha a letra A --
+SELECT * FROM cursos
+WHERE nome NOT LIKE '%A%';
+
+-- Exibe todos os campos da tabela cursos em que o nome comece com PH e termine com P --
+SELECT * FROM cursos
+WHERE nome LIKE 'PH%P';
+
+-- Exibe todos os campos da tabela cursos em que o nome comece com PH, termine com P e tenha mais alguma coisa --
+SELECT * FROM cursos
+WHERE nome LIKE 'PH%P_';
+
+-- Exibe todos os campos da tabela cursos em que o nome comece com p, tenha alguma coisa, tenha p e tenha algo ou nada --
+SELECT * FROM cursos
+WHERE nome LIKE 'p_p%';
+
+-- Exibe todos os campos da tabela gafanhotos em que no nome tenha silva --
+SELECT * FROM gafanhotos
+WHERE nome LIKE '%silva%';
+
+-- Exibe as nacionalidades da tabela gafanhotos sem que haja repetições ordenando pelo nacionalidade --
+SELECT DISTINCT nacionalidade FROM gafanhotos
+ORDER BY nacionalidade;
+
+-- Exibe as cargas da tabela cursos sem que haja repetições ordenando pela carga --
+SELECT DISTINCT carga FROM cursos
+ORDER BY carga;
+
+-- Exibe a quantidade de nomes registrados na tabela cursos --
+SELECT COUNT(nome) FROM cursos;
+
+-- Exibe a quantidade de cursos da tabela cursos que possuem carga acima de 40 horas --
+SELECT COUNT(*) FROM cursos WHERE carga > 40; 
+
+-- Exibe o maior total de aulas da tabela cursos --
+SELECT MAX(totaulas) FROM cursos;
+
+-- Exibe a maior carga da tabela cursos --
+SELECT MAX(carga) FROM cursos;
+
+-- Exibe o máximo do total de aulas que aconteceram em 2016 da tabela cursos --
+SELECT MAX(totaulas) FROM cursos WHERE ano = '2016';
+
+-- Exibe o mínimo do total de aulas da tabela cursos --
+SELECT MIN(totaulas) FROM cursos;
+
+-- Exibe a soma do total de aulas de todos os cursos da tabela cursos --
+SELECT SUM(totaulas) FROM cursos;
+
+-- Exibe a soma do total de aulas de todos os cursos de 2016 da tabela cursos --
+SELECT SUM(totaulas) FROM cursos WHERE ano = '2016';
+
+-- Exibe a média do total de aulas de todos os cursos da tabela cursos --
+SELECT AVG(totaulas) FROM cursos;
+
+-- Exibe a média do total de aulas de todos os cursos de 2016 da tabela cursos --
+SELECT AVG(totaulas) FROM cursos WHERE ano = '2016';
