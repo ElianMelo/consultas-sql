@@ -384,3 +384,40 @@ SELECT carga, COUNT(*) FROM cursos
 WHERE ano > 2015
 GROUP BY carga
 HAVING carga > (SELECT AVG(carga) FROM cursos);
+
+-- Exercícios Curso em Vídeo MySQL #12 - SELECT (Parte 2) --
+
+-- Exercício 01 --
+SELECT * FROM gafanhotos
+WHERE sexo = 'F';
+
+-- Exercício 02 --
+SELECT * FROM gafanhotos
+WHERE nascimento > '2000-01-01' AND nascimento < '2015-12-31';
+
+-- Exercício 03 --
+SELECT * FROM gafanhotos
+WHERE sexo = 'M' AND profissao = 'Programador';
+
+-- Exercício 04 --
+SELECT * FROM gafanhotos
+WHERE sexo = 'F' AND nacionalidade = 'Brasil' AND nome LIKE'J%';
+
+-- Exercício 05 --
+SELECT nome, nacionalidade FROM gafanhotos
+WHERE nome LIKE '%Silva%' AND nacionalidade != 'Brasil' AND peso < '100';
+
+-- Exercício 06 --
+SELECT MAX(altura) FROM gafanhotos
+WHERE sexo = 'M' AND nacionalidade = 'Brasil';
+
+-- Exercício 07 --
+SELECT AVG(peso) FROM gafanhotos;
+
+-- Exercício 08 --
+SELECT MIN(peso) FROM gafanhotos
+WHERE sexo = 'F' AND nacionalidade != 'Brasil' AND nascimento > '1990-01-01' AND nascimento < '2000-12-31';
+
+-- Exercício 09 -- 
+SELECT COUNT(*) FROM gafanhotos
+WHERE sexo = 'F' AND altura > '1.90';
