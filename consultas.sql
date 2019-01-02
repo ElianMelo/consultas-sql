@@ -271,7 +271,7 @@ ORDER BY nome;
 
 -- Exibe todos os campos da tabela cursos em que o nome começa com P --
 SELECT * FROM cursos
-WHERE nome LIKE 'P%'; 
+WHERE nome LIKE 'P%';
 
 -- Exibe todos os campos da tabela cursos em que o nome termina com A --
 SELECT * FROM cursos
@@ -313,7 +313,7 @@ ORDER BY carga;
 SELECT COUNT(nome) FROM cursos;
 
 -- Exibe a quantidade de cursos da tabela cursos que possuem carga acima de 40 horas --
-SELECT COUNT(*) FROM cursos WHERE carga > 40; 
+SELECT COUNT(*) FROM cursos WHERE carga > 40;
 
 -- Exibe o maior total de aulas da tabela cursos --
 SELECT MAX(totaulas) FROM cursos;
@@ -338,3 +338,49 @@ SELECT AVG(totaulas) FROM cursos;
 
 -- Exibe a média do total de aulas de todos os cursos de 2016 da tabela cursos --
 SELECT AVG(totaulas) FROM cursos WHERE ano = '2016';
+
+-- Exibe as cargas da tabela cursos agrupadas pela carga --
+SELECT carga FROM cursos
+GROUP BY carga;
+
+-- Exibe as cargas e uma contagem nos nomes da tabela cursos agrupadas pela carga --
+-- Exibe as cargas agrupadas e a quantidade em cada grupo --
+SELECT carga, COUNT(nome) FROM cursos
+GROUP BY carga;
+
+-- Exibe o total de aulas agrupadas e a quantidade de cursos em cada grupo --
+SELECT totaulas, COUNT(*) FROM cursos
+GROUP BY totaulas
+ORDER BY totaulas;
+
+-- Exibe as cargas agrupadas em que o total de aulas é 30 e a quantidade em cada grupo --
+SELECT carga, COUNT(nome) FROM cursos
+WHERE totaulas = 30
+GROUP BY carga;
+
+-- Exibe as cargas agrupadas e a quantidade em cada grupo, caso o grupo tenha mais de 3 registros --
+SELECT carga, COUNT(nome) FROM cursos
+GROUP BY carga
+HAVING COUNT(nome) > 3;
+
+-- Exibe os anos agrupados e a quantidade em cada grupo ordenando de forma decrescente a quantidade --
+-- em cada grupo caso haja uma quantidade maior ou igual a 5 --
+SELECT ano, COUNT(*) FROM cursos
+GROUP BY ano
+HAVING COUNT(*) >= 5
+ORDER BY COUNT(*) desc;
+
+-- Exibe os anos agrupados e a quantidade em cada grupo, em que o total de aulas é maior que 30 --
+-- e que haja apenas grupos com ano superior a 2013, ordenando a quantidade de forma decrescente --
+SELECT ano, COUNT(*) FROM cursos
+WHERE totaulas > 30
+GROUP BY ano
+HAVING ano > 2013
+ORDER BY COUNT(*) desc;
+
+-- Exibe a carga agrupada e a quantidade em cada grupo, em que o ano seja maior que 2015 --
+-- e que a carga seja maior que a média das cargas --
+SELECT carga, COUNT(*) FROM cursos
+WHERE ano > 2015
+GROUP BY carga
+HAVING carga > (SELECT AVG(carga) FROM cursos);
