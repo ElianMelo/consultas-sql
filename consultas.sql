@@ -421,3 +421,27 @@ WHERE sexo = 'F' AND nacionalidade != 'Brasil' AND nascimento > '1990-01-01' AND
 -- Exercício 09 -- 
 SELECT COUNT(*) FROM gafanhotos
 WHERE sexo = 'F' AND altura > '1.90';
+
+-- Exercícios Curso em Vídeo MySQL #13 - SELECT (Parte 3) --
+
+-- Exercício 01 --
+SELECT profissao, COUNT(*) FROM gafanhotos
+GROUP BY profissao
+ORDER BY profissao;
+
+-- Exercício 02 --
+SELECT sexo, COUNT(*) FROM gafanhotos
+WHERE nascimento > '2005-01-01'
+GROUP BY sexo;
+
+-- Exercício 03 --
+SELECT nacionalidade, COUNT(*) FROM gafanhotos
+WHERE nacionalidade != 'Brasil'
+GROUP BY nacionalidade
+HAVING COUNT(*) > 3;
+
+-- Exercício 04 --
+SELECT altura, COUNT(*) FROM gafanhotos
+WHERE peso > '100'
+GROUP BY altura
+HAVING altura > (SELECT AVG(altura) FROM gafanhotos);
