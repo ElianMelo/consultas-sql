@@ -445,3 +445,80 @@ SELECT altura, COUNT(*) FROM gafanhotos
 WHERE peso > '100'
 GROUP BY altura
 HAVING altura > (SELECT AVG(altura) FROM gafanhotos);
+
+-- Lista de exercícios SQL Teaching --
+-- https://www.sqlteaching.com/ --
+
+-- Lição 1: SELECT * --
+SELECT * FROM family_members;
+
+-- Lição 2: SELECT colunas específicas --
+SELECT name, species FROM family_members;
+
+-- Lição 3: WHERE ... igual --
+SELECT * FROM family_members 
+WHERE species = 'dog';
+
+-- Lição 4: WHERE ... maior que --
+SELECT * FROM family_members 
+WHERE num_books_read > 190;
+
+-- Lição 5: WHERE ... maior ou igual que --
+SELECT * FROM family_members 
+WHERE num_books_read >= 180;
+
+-- Lição 6: AND --
+SELECT * FROM friends_of_pickles 
+WHERE species = 'dog' AND height_cm < 45;
+
+-- Liçãp 7: OR --
+SELECT * FROM friends_of_pickles 
+WHERE species = 'dog' OR height_cm < 45;
+
+-- Lição 8: IN --
+SELECT * FROM friends_of_pickles 
+WHERE species NOT IN ('cat', 'dog');
+
+-- Lição 9: DISTINCT --
+SELECT DISTINCT species FROM friends_of_pickles 
+WHERE height_cm > 50;
+
+-- Lição 10: ORDER BY --
+SELECT * FROM friends_of_pickles
+ORDER BY height_cm DESC;
+
+-- Lição 11: LIMIT # de linhas retornadas; -- 
+SELECT * FROM friends_of_pickles 
+LIMIT 1;
+
+-- Lição 12: COUNT(*) --
+SELECT COUNT(*) FROM friends_of_pickles;
+
+-- Lição 13: COUNT(*) ... WHERE --
+SELECT COUNT(*) FROM friends_of_pickles 
+WHERE species = 'dog';
+
+-- Lição 14: SUM --
+SELECT SUM(num_books_read) FROM family_members;
+
+-- Lição 15: AVG --
+SELECT AVG(num_books_read) FROM family_members;
+
+-- Lição 16: MAX e MIN --
+SELECT MAX(num_books_read) FROM family_members;
+
+-- Lição 17: GROUP BY --
+SELECT MAX(height_cm), species FROM friends_of_pickles
+GROUP BY species;
+
+-- Lição 18: Consultas aninhadas --
+SELECT * FROM family_members
+WHERE num_books_read = (SELECT MAX(num_books_read) FROM family_members);
+
+-- Lição 19: NULL --
+SELECT * FROM family_members
+WHERE favorite_book IS NOT NULL;
+
+-- Lição 20: Data --
+SELECT * FROM celebs_born
+WHERE birthdate > '1980-09-01';
