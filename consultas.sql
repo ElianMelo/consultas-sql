@@ -553,3 +553,34 @@ WHERE idcurso = '6';
 -- Como o curso não há refência, ele será apagado --
 DELETE FROM cursos
 WHERE idcurso = '28';
+
+-- Seleciona as colunas nome e curso preferido da tabela gafanhotos --
+SELECT nome, cursopreferido FROM gafanhotos;
+
+-- Seleciona as colunas nome e ano da tabela cursos --
+SELECT nome, ano FROM cursos;
+
+-- Seleciona todos os gafanhotos unidos a todos os cursos --
+SELECT gafanhotos.nome, gafanhotos.cursopreferido, cursos.nome, cursos.ano
+FROM gafanhotos JOIN cursos;
+
+-- Seleciona os gafanhotos ligados a seu curso favorito --
+SELECT gafanhotos.nome, cursos.nome, cursos.ano
+FROM gafanhotos JOIN cursos
+ON cursos.idcurso = gafanhotos.cursopreferido;
+
+-- Seleciona os gafanhotos ligados a seu curso favorito utilizando apelidos de coluna --
+SELECT g.nome, c.nome, c.ano
+FROM gafanhotos AS g JOIN cursos AS c
+ON c.idcurso = g.cursopreferido
+ORDER BY g.nome;
+
+-- Seleciona todos os gafanhotos ligados ou não a seu curso favorito utilizando apelidos de coluna --
+SELECT g.nome, c.nome, c.ano
+FROM gafanhotos AS g LEFT OUTER JOIN cursos AS c
+ON c.idcurso = g.cursopreferido;
+
+-- Seleciona todos os cursos ligados ou não a algum gafanhoto utilizando apelidos de coluna --
+SELECT g.nome, c.nome, c.ano
+FROM gafanhotos AS g RIGHT OUTER JOIN cursos AS c
+ON c.idcurso = g.cursopreferido;
