@@ -522,3 +522,34 @@ WHERE favorite_book IS NOT NULL;
 -- Lição 20: Data --
 SELECT * FROM celebs_born
 WHERE birthdate > '1980-09-01';
+
+-- Relacionamento entre tabelas --
+DESCRIBE gafanhotos;
+
+-- Adiciona a coluna cursopreferido na tabela gafanhotos --
+ALTER TABLE gafanhotos
+ADD COLUMN cursopreferido int;
+
+-- Transforma a coluna cursopreferido em uma chave estrangeira --
+ALTER TABLE gafanhotos
+ADD FOREIGN KEY(cursopreferido)
+REFERENCES cursos(idcurso);
+
+-- Exibe todos os campos e registros da tabela gafanhotos e cursos --
+SELECT * FROM gafanhotos;
+SELECT * FROM cursos;
+
+-- Faz o Daniel preferir o curso MySQL --
+UPDATE gafanhotos
+SET cursopreferido = '6'
+WHERE id = '1';
+
+-- Tenta apagar da tabela cursos o curso com id igual a 6 --
+-- Resultara em um erro de referência --
+DELETE FROM cursos
+WHERE idcurso = '6';
+
+-- Apaga da tabela cursos o curso com id igual a 28 --
+-- Como o curso não há refência, ele será apagado --
+DELETE FROM cursos
+WHERE idcurso = '28';
