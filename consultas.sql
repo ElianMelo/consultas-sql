@@ -583,4 +583,36 @@ ON c.idcurso = g.cursopreferido;
 -- Seleciona todos os cursos ligados ou não a algum gafanhoto utilizando apelidos de coluna --
 SELECT g.nome, c.nome, c.ano
 FROM gafanhotos AS g RIGHT OUTER JOIN cursos AS c
-ON c.idcurso = g.cursopreferido;
+ON c.idcurso = g.cursopreferido;	
+
+-- Adiciona a tabela que relaciona gafanhotos e cursos --
+CREATE TABLE gafanhoto_assiste_curso (
+	id int NOT NULL AUTO_INCREMENT,	
+    data date,
+    idgafanhoto int,
+    idcurso int,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idgafanhoto) REFERENCES gafanhotos(id),
+    FOREIGN KEY(idcurso) REFERENCES cursos(idcurso)
+) DEFAULT CHARSET = utf8;
+
+-- Insere dados na tabela g_assiste_c --
+INSERT INTO gafanhoto_assiste_curso VALUES
+(DEFAULT, '2014-03-01', '1', '2');
+
+-- Exibe todos os campos da tabela g_assiste_c --	
+SELECT * FROM gafanhoto_assiste_curso;
+
+-- Une as tabelas gafanhotos e gafanhoto_assiste_curso pelo id do gafanhoto nas tabelas --
+SELECT g.nome, idcurso FROM gafanhotos g
+JOIN gafanhoto_assiste_curso a
+ON g.id = a.idgafanhoto
+ORDER BY g.nome;
+
+-- Une as tabelas gafanhotos, gafanhoto_assiste_curso e cursos pelo id do gafanhoto e do curso nas tabelas --
+SELECT g.nome, c.nome FROM gafanhotos g
+JOIN gafanhoto_assiste_curso a
+ON g.id = a.idgafanhoto
+JOIN cursos c
+ON c.idcurso = a.idcurso
+ORDER BY g.nome;
