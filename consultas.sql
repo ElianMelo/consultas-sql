@@ -418,7 +418,7 @@ SELECT AVG(peso) FROM gafanhotos;
 SELECT MIN(peso) FROM gafanhotos
 WHERE sexo = 'F' AND nacionalidade != 'Brasil' AND nascimento > '1990-01-01' AND nascimento < '2000-12-31';
 
--- Exercício 09 -- 
+-- Exercício 09 --
 SELECT COUNT(*) FROM gafanhotos
 WHERE sexo = 'F' AND altura > '1.90';
 
@@ -456,46 +456,46 @@ SELECT * FROM family_members;
 SELECT name, species FROM family_members;
 
 -- Lição 3: WHERE ... igual --
-SELECT * FROM family_members 
+SELECT * FROM family_members
 WHERE species = 'dog';
 
 -- Lição 4: WHERE ... maior que --
-SELECT * FROM family_members 
+SELECT * FROM family_members
 WHERE num_books_read > 190;
 
 -- Lição 5: WHERE ... maior ou igual que --
-SELECT * FROM family_members 
+SELECT * FROM family_members
 WHERE num_books_read >= 180;
 
 -- Lição 6: AND --
-SELECT * FROM friends_of_pickles 
+SELECT * FROM friends_of_pickles
 WHERE species = 'dog' AND height_cm < 45;
 
 -- Liçãp 7: OR --
-SELECT * FROM friends_of_pickles 
+SELECT * FROM friends_of_pickles
 WHERE species = 'dog' OR height_cm < 45;
 
 -- Lição 8: IN --
-SELECT * FROM friends_of_pickles 
+SELECT * FROM friends_of_pickles
 WHERE species NOT IN ('cat', 'dog');
 
 -- Lição 9: DISTINCT --
-SELECT DISTINCT species FROM friends_of_pickles 
+SELECT DISTINCT species FROM friends_of_pickles
 WHERE height_cm > 50;
 
 -- Lição 10: ORDER BY --
 SELECT * FROM friends_of_pickles
 ORDER BY height_cm DESC;
 
--- Lição 11: LIMIT # de linhas retornadas; -- 
-SELECT * FROM friends_of_pickles 
+-- Lição 11: LIMIT # de linhas retornadas; --
+SELECT * FROM friends_of_pickles
 LIMIT 1;
 
 -- Lição 12: COUNT(*) --
 SELECT COUNT(*) FROM friends_of_pickles;
 
 -- Lição 13: COUNT(*) ... WHERE --
-SELECT COUNT(*) FROM friends_of_pickles 
+SELECT COUNT(*) FROM friends_of_pickles
 WHERE species = 'dog';
 
 -- Lição 14: SUM --
@@ -583,11 +583,11 @@ ON c.idcurso = g.cursopreferido;
 -- Seleciona todos os cursos ligados ou não a algum gafanhoto utilizando apelidos de coluna --
 SELECT g.nome, c.nome, c.ano
 FROM gafanhotos AS g RIGHT OUTER JOIN cursos AS c
-ON c.idcurso = g.cursopreferido;	
+ON c.idcurso = g.cursopreferido;
 
 -- Adiciona a tabela que relaciona gafanhotos e cursos --
 CREATE TABLE gafanhoto_assiste_curso (
-	id int NOT NULL AUTO_INCREMENT,	
+	id int NOT NULL AUTO_INCREMENT,
     data date,
     idgafanhoto int,
     idcurso int,
@@ -600,7 +600,7 @@ CREATE TABLE gafanhoto_assiste_curso (
 INSERT INTO gafanhoto_assiste_curso VALUES
 (DEFAULT, '2014-03-01', '1', '2');
 
--- Exibe todos os campos da tabela g_assiste_c --	
+-- Exibe todos os campos da tabela g_assiste_c --
 SELECT * FROM gafanhoto_assiste_curso;
 
 -- Une as tabelas gafanhotos e gafanhoto_assiste_curso pelo id do gafanhoto nas tabelas --
@@ -616,3 +616,69 @@ ON g.id = a.idgafanhoto
 JOIN cursos c
 ON c.idcurso = a.idcurso
 ORDER BY g.nome;
+
+-- Lista de exercícios SQL Teaching --
+-- https://www.sqlteaching.com/ --
+
+-- Lição 21: Inner joins --
+SELECT c.name, a.actor_name FROM character c
+JOIN character_actor a
+ON a.character_id = c.id;
+
+-- Lição 22: Multiplos joins --
+SELECT c.name, a.name FROM character_actor ca
+JOIN character c
+ON ca.character_id = c.id
+JOIN actor a
+ON ca.actor_id = a.id;
+
+-- Lição 23: Joins com WHERE --
+SELECT c.name, s.name FROM character_tv_show cs
+JOIN character c
+ON cs.character_id = c.id
+JOIN tv_show s
+ON cs.tv_show_id = s.id
+WHERE c.name != 'Willow Rosenberg' AND
+s.name != 'How I Met Your Mother';
+
+-- Lição 24: Left joins --
+SELECT c.name, a.name FROM character c
+LEFT JOIN character_actor ca
+ON ca.character_id = c.id
+LEFT JOIN actor a
+ON ca.actor_id = a.id;
+
+-- Lição 25: Apelido de tabela --
+SELECT c.name, a.name FROM character AS c
+LEFT JOIN character_actor AS ca
+ON ca.character_id = c.id
+LEFT JOIN actor AS a
+ON ca.actor_id = a.id;
+
+-- Lição 26: Apelido de coluna --
+SELECT c.name character, a.name actor FROM character c
+LEFT JOIN character_actor ca
+ON ca.character_id = c.id
+LEFT JOIN actor a
+ON ca.actor_id = a.id;
+
+-- Lição 27: Auto joins --
+SELECT e.name employee_name, b.name boss_name FROM employees e
+JOIN employees b
+ON e.boss_id = b.id;
+
+-- Lição 28: LIKE --
+SELECT * FROM robots
+WHERE name LIKE '%Robot%' AND name LIKE '%20__%';
+
+-- Lição 29: CASE --
+SELECT *,CASE WHEN species = 'human' THEN 'talk'
+WHEN species = 'dog' THEN 'bark'
+WHEN species = 'cat' THEN 'meow' END sound FROM friends_of_pickles;
+
+-- Lição 30: SUBSTR --
+SELECT * FROM robots
+WHERE SUBSTR(location, -2) LIKE 'NY';
+
+-- Lição 31: COALESCE --
+SELECT name, COALESCE(tank, gun, sword) weapon FROM fighters;
